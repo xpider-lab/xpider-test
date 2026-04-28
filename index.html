@@ -63,10 +63,24 @@
         .main-nav ul { display: flex; list-style: none; gap: 2rem; }
         .main-nav a { text-decoration: none; color: #111; font-weight: 600; transition: color 0.3s; }
         .main-nav a:hover { color: #dc2626; }
+        
         .btn-whatsapp { background: #dc2626; color: white; padding: 0.7rem 1.5rem; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; font-weight: 600; transition: all 0.3s; position: relative; overflow: hidden; }
         .btn-whatsapp::after { content: ''; position: absolute; top: 50%; left: 50%; width: 0; height: 0; background: rgba(255,255,255,0.25); border-radius: 50%; transform: translate(-50%, -50%); transition: width 0.5s ease, height 0.5s ease; z-index: -1; }
         .btn-whatsapp:hover::after { width: 300px; height: 300px; }
         .btn-whatsapp:hover { background: #111; transform: translateY(-2px); }
+        
+        .wa-desktop { display: inline-flex; }
+        .wa-mobile { 
+            display: none; 
+            margin: 1.5rem auto 0; 
+            padding: 0.6rem 1.2rem; 
+            font-size: 0.9rem; 
+            width: fit-content;
+            background: transparent;
+            color: #dc2626;
+            border: 1px solid #dc2626;
+        }
+        .wa-mobile:hover { background: #dc2626; color: white; }
         
         .hero { position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; background: #ffffff; padding-top: 80px; overflow: hidden; }
         #particleCanvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: block; z-index: 1; }
@@ -162,7 +176,6 @@
         .modal-close { position: absolute; top: 15px; right: 20px; font-size: 1.5rem; cursor: pointer; color: #999; z-index: 10; transition: color 0.3s; }
         .modal-close:hover { color: #dc2626; }
         .modal-icon { text-align: center; font-size: 3rem; color: #dc2626; margin-bottom: 1rem; }
-        /* ✅ NUEVO: Efecto float solo en el icono del modal */
         .modal-icon.float-active { animation: float-logo 4s ease-in-out infinite; transform-origin: center top; }
         .modal-title { text-align: center; font-size: 1.5rem; margin-bottom: 1rem; }
         .modal-benefits { list-style: none; margin: 1rem 0; }
@@ -174,7 +187,8 @@
             .header-inner { flex-direction: column; align-items: center; text-align: center; padding: 0 1rem; }
             .main-nav { width: 100%; }
             .main-nav ul { justify-content: center; gap: 0.8rem; flex-wrap: wrap; margin: 0.5rem 0; }
-            .btn-whatsapp { width: 100%; max-width: 280px; margin: 0.5rem auto; justify-content: center; }
+            .wa-desktop { display: none !important; }
+            .wa-mobile { display: inline-flex !important; }
             .hero-title { font-size: 2rem; }
             .resultados-grid { grid-template-columns: repeat(2, 1fr); }
             .resultados-header h2 { font-size: 2rem; }
@@ -202,7 +216,7 @@
                     <li><a href="#contacto">Contacto</a></li>
                 </ul>
             </nav>
-            <a href="https://wa.me/56949753236" class="btn-whatsapp" id="waButton" target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp">
+            <a href="https://wa.me/56949753236" class="btn-whatsapp wa-desktop" id="waButton" target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp">
                 <i class="fab fa-whatsapp"></i> WhatsApp
             </a>
         </div>
@@ -282,12 +296,18 @@
                         <li><i class="fas fa-map-marker-alt"></i> Santiago, Chile</li>
                     </ul>
                 </div>
-                <form class="contact-form" id="contactForm" aria-label="Formulario de contacto">
-                    <input type="text" id="contactName" placeholder="Tu nombre" required aria-label="Nombre">
-                    <input type="email" id="contactEmail" placeholder="Tu email" required aria-label="Email">
-                    <input type="tel" id="contactPhone" placeholder="Tu teléfono" aria-label="Teléfono">
-                    <button type="submit" class="btn btn-primary">Enviar mensaje</button>
-                </form>
+                <div>
+                    <form class="contact-form" id="contactForm" aria-label="Formulario de contacto">
+                        <input type="text" id="contactName" placeholder="Tu nombre" required aria-label="Nombre">
+                        <input type="email" id="contactEmail" placeholder="Tu email" required aria-label="Email">
+                        <input type="tel" id="contactPhone" placeholder="Tu teléfono" aria-label="Teléfono">
+                        <button type="submit" class="btn btn-primary">Enviar mensaje</button>
+                    </form>
+                    <!-- ✅ WHATSAPP DISCRETO SOLO EN MÓVIL -->
+                    <a href="https://wa.me/56949753236" class="btn-whatsapp wa-mobile" target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp (móvil)">
+                        <i class="fab fa-whatsapp"></i> Escríbenos por WhatsApp
+                    </a>
+                </div>
             </div>
         </section>
     </main>
