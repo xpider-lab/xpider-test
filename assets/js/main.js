@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // ✅ 1. PARTÍCULAS CON CONEXIONES (Líneas entre partículas cercanas)
+    // ✅ 1. PARTÍCULAS CON CONEXIONES
     const canvas = document.getElementById('particleCanvas');
     if (canvas) {
         const ctx = canvas.getContext('2d');
@@ -12,8 +12,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         function createParticles() {
             particles = [];
-            const particleCount = window.innerWidth < 768 ? 50 : 100; // Menos partículas en móvil
-            for (let i = 0; i < particleCount; i++) {
+            const count = window.innerWidth < 768 ? 50 : 100;
+            for (let i = 0; i < count; i++) {
                 particles.push({
                     x: Math.random() * canvas.width,
                     y: Math.random() * canvas.height,
@@ -28,17 +28,15 @@ document.addEventListener('DOMContentLoaded', function() {
         function drawParticles() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             
-            // Dibujar conexiones entre partículas cercanas
+            // Conexiones entre partículas cercanas
             for (let i = 0; i < particles.length; i++) {
                 for (let j = i + 1; j < particles.length; j++) {
                     const dx = particles[i].x - particles[j].x;
                     const dy = particles[i].y - particles[j].y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-                    
-                    if (distance < 120) { // Conectar si están cerca
-                        const opacity = (1 - distance / 120) * 0.3;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 120) {
                         ctx.beginPath();
-                        ctx.strokeStyle = `rgba(220, 38, 38, ${opacity})`;
+                        ctx.strokeStyle = `rgba(220, 38, 38, ${(1 - dist / 120) * 0.3})`;
                         ctx.lineWidth = 0.8;
                         ctx.moveTo(particles[i].x, particles[i].y);
                         ctx.lineTo(particles[j].x, particles[j].y);
@@ -47,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
             
-            // Dibujar partículas
+            // Partículas
             for (let p of particles) {
                 ctx.beginPath();
                 ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
@@ -62,24 +60,21 @@ document.addEventListener('DOMContentLoaded', function() {
             requestAnimationFrame(drawParticles);
         }
 
-        resizeCanvas();
-        createParticles();
-        drawParticles();
+        resizeCanvas(); createParticles(); drawParticles();
         window.addEventListener('resize', () => { resizeCanvas(); createParticles(); });
     }
 
-    // ✅ 2. MODAL CON ICONOS CORRECTOS POR SERVICIO
+    // ✅ 2. MODAL CON ICONO FLOTANTE (SOLO EL ICONO)
     const modal = document.getElementById('modal');
     const modalContent = document.querySelector('.modal-content');
+    const modalIcon = document.getElementById('modalIcon');
     
     if (modal && modalContent) {
-        const modalIcon = document.getElementById('modalIcon');
         const modalTitle = document.getElementById('modalTitle');
         const modalDesc = document.getElementById('modalDescription');
         const modalBenefits = document.getElementById('modalBenefits');
         const modalPhrase = document.getElementById('modalPhrase');
 
-        // ✅ Iconos específicos para CADA servicio
         const servicesData = {
             1: { icon: '<i class="fas fa-comment-dots"></i>', title: 'Chatbots 24/7', desc: 'Atención al cliente automática que resuelve dudas al instante.', benefits: ['Respuesta inmediata', 'Ahorro en costos', 'Integración con WhatsApp', 'Disponible 24/7'], phrase: '"Mis clientes siempre reciben respuesta"' },
             2: { icon: '<i class="fas fa-chart-line"></i>', title: 'Analítica Predictiva', desc: 'Anticipa tendencias y toma decisiones basadas en datos.', benefits: ['Predicciones precisas', 'Decisiones basadas en datos', 'Ventaja competitiva', 'Reportes automáticos'], phrase: '"Me adelanto a la competencia"' },
@@ -102,10 +97,7 @@ document.addEventListener('DOMContentLoaded', function() {
             card.addEventListener('click', function() {
                 const id = this.getAttribute('data-id');
                 const data = servicesData[id];
-                if (!data) {
-                    console.error('Servicio no encontrado:', id);
-                    return;
-                }
+                if (!data) return;
 
                 modalIcon.innerHTML = data.icon;
                 modalTitle.textContent = data.title;
@@ -115,14 +107,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 modal.style.display = 'flex';
                 setTimeout(() => modal.classList.add('active'), 10);
-                setTimeout(() => modalContent.classList.add('float-animate'), 300);
+                // ✅ SOLO EL ICONO FLOTA
+                setTimeout(() => modalIcon.classList.add('float-active'), 300);
                 document.body.style.overflow = 'hidden';
             });
         });
 
         function closeModal() {
             modal.classList.remove('active');
-            modalContent.classList.remove('float-animate');
+            // ✅ QUITA EL EFECTO DEL ICONO
+            modalIcon.classList.remove('float-active');
             setTimeout(() => {
                 modal.style.display = 'none';
                 document.body.style.overflow = '';
@@ -169,8 +163,7 @@ document.addEventListener('DOMContentLoaded', function() {
         counters.forEach(animateCounter);
     }
 
-    // ✅ 5. FORMULARIO - NOTA: Para envío automático necesitas Formspree
-    // Instrucciones abajo
+    // ✅ 5. FORMULARIO (MAILTO)
     const form = document.getElementById('contactForm');
     if (form) {
         form.addEventListener('submit', function(e) {
@@ -179,34 +172,9 @@ document.addEventListener('DOMContentLoaded', function() {
             const email = document.getElementById('contactEmail').value.trim();
             const telefono = document.getElementById('contactPhone').value.trim();
             if (!nombre || !email) { alert('Por favor completa tu nombre y email'); return; }
-            
-            // OPCIÓN 1: mailto (actual - abre cliente de correo)
             const subject = encodeURIComponent(`Contacto Xpider IA - ${nombre}`);
             const body = encodeURIComponent(`Nombre: ${nombre}\nEmail: ${email}\nTeléfono: ${telefono || 'No especificado'}\n\nMensaje enviado desde xpider.cl`);
             window.location.href = `mailto:xpidercl@gmail.com?subject=${subject}&body=${body}`;
-            
-            // OPCIÓN 2: Formspree (envío automático - requiere configuración)
-            // Descomenta las líneas de abajo y configura Formspree (ver instrucciones abajo)
-            /*
-            const formData = new FormData(form);
-            formData.append('nombre', nombre);
-            formData.append('email', email);
-            formData.append('telefono', telefono);
-            
-            fetch('https://formspree.io/f/TU_CODIGO_FORMSPREE', {
-                method: 'POST',
-                body: formData,
-                headers: { 'Accept': 'application/json' }
-            }).then(response => {
-                if (response.ok) {
-                    alert('¡Mensaje enviado! Te contactaremos pronto.');
-                    form.reset();
-                } else {
-                    alert('Error al enviar. Intenta de nuevo.');
-                }
-            }).catch(() => alert('Error de conexión. Intenta de nuevo.'));
-            */
-            
             form.reset();
         });
     }
