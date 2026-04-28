@@ -75,17 +75,22 @@
         .section-subtitle { background: #dc2626; color: white; display: inline-block; padding: 0.3rem 1rem; border-radius: 50px; font-size: 0.7rem; letter-spacing: 2px; margin-bottom: 1rem; }
         .section-header h2 { font-size: 2.5rem; margin-bottom: 1rem; color: #111; }
         
-        .category-block { margin-bottom: 3rem; }
-        .category-title { font-size: 1.35rem; font-weight: 700; margin-bottom: 1.2rem; color: #111; display: flex; align-items: center; gap: 0.7rem; }
-        .category-title i { color: #dc2626; font-size: 1.4rem; }
-        .category-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
-        .cat-card { 
-            background: #fafafa; border: 1px solid #e5e5e5; border-radius: 10px; padding: 1.3rem 1.5rem; 
-            cursor: pointer; transition: all 0.3s; position: relative; z-index: 2; pointer-events: auto;
-        }
-        .cat-card:hover { border-color: #dc2626; box-shadow: 0 6px 18px rgba(220,38,38,0.08); transform: translateY(-3px); background: #fff; }
-        .cat-card h3 { font-size: 1.15rem; margin: 0 0 0.3rem; color: #111; }
-        .cat-card p { font-size: 0.88rem; color: #555; margin: 0; line-height: 1.45; }
+        /* ✅ OPCIÓN 3: 3 CORE + LISTA SECUNDARIA */
+        .core-services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-bottom: 3.5rem; }
+        .core-card { background: #fff; border: 2px solid #111; border-radius: 16px; padding: 2.5rem 2rem; text-align: center; cursor: pointer; transition: all 0.3s; position: relative; z-index: 2; pointer-events: auto; }
+        .core-card:hover { border-color: #dc2626; transform: translateY(-8px); box-shadow: 0 15px 30px rgba(220,38,38,0.15); }
+        .core-card .core-icon { font-size: 3rem; color: #dc2626; margin-bottom: 1rem; display: block; }
+        .core-card h3 { font-size: 1.4rem; margin-bottom: 0.5rem; color: #111; }
+        .core-card p { color: #555; line-height: 1.5; }
+
+        .secondary-services { background: #fafafa; border-radius: 12px; padding: 2rem; margin-top: 1rem; }
+        .secondary-services h3 { font-size: 1.2rem; margin-bottom: 1.5rem; text-align: center; color: #111; font-weight: 700; }
+        .secondary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.2rem; }
+        .secondary-item { display: flex; align-items: flex-start; gap: 0.8rem; padding: 0.8rem; border-radius: 8px; transition: background 0.2s; }
+        .secondary-item:hover { background: #fff; }
+        .secondary-item i { color: #dc2626; font-size: 1.1rem; margin-top: 0.2rem; flex-shrink: 0; }
+        .secondary-item strong { display: block; font-size: 1rem; color: #111; margin-bottom: 0.15rem; }
+        .secondary-item span { display: block; font-size: 0.85rem; color: #666; line-height: 1.3; }
 
         .resultados-section { background: #000000; color: #FFFFFF; padding: 5rem 0; border-top: 4px solid #dc2626; border-bottom: 4px solid #dc2626; }
         .resultados-container { max-width: 1380px; margin: 0 auto; padding: 0 30px; }
@@ -147,7 +152,8 @@
             .contact-grid { grid-template-columns: 1fr; }
             .modal-content { width: 95%; padding: 1.5rem; }
             .hero-description { font-size: 1.15rem; padding: 1.25rem 1.5rem; }
-            .category-grid { grid-template-columns: 1fr; }
+            .core-services-grid { grid-template-columns: 1fr; }
+            .secondary-grid { grid-template-columns: 1fr; }
         }
         @media (max-width: 480px) { .resultados-grid { grid-template-columns: 1fr; } .resultado-number { font-size: 2.2rem; } }
         #inicio, #servicios, #resultados, #contacto { scroll-margin-top: 100px; }
@@ -184,44 +190,43 @@
 
         <section id="servicios">
             <div class="container">
-                <div class="section-header"><div class="section-subtitle">SERVICIOS</div><h2>Lo que podemos hacer por ti</h2><p>Soluciones organizadas por necesidad</p></div>
+                <div class="section-header"><div class="section-subtitle">SERVICIOS</div><h2>Lo que podemos hacer por ti</h2><p>Soluciones estratégicas para resultados reales</p></div>
                 
-                <div class="category-block">
-                    <div class="category-title"><i class="fas fa-robot"></i> Atención & Automatización</div>
-                    <div class="category-grid">
-                        <article class="cat-card" data-id="1"><h3>Chatbots 24/7</h3><p>Atención al cliente automática que resuelve dudas al instante.</p></article>
-                        <article class="cat-card" data-id="4"><h3>Automatización RPA</h3><p>Automatiza tareas repetitivas y ahorra tiempo operativo.</p></article>
-                        <article class="cat-card" data-id="5"><h3>Webs con IA</h3><p>Sitios web optimizados que convierten visitantes en clientes.</p></article>
-                        <article class="cat-card" data-id="15"><h3>Soporte 24/7</h3><p>Asistencia humana + chatbot siempre disponibles.</p></article>
-                    </div>
+                <!-- ✅ 3 CORE DESTACADOS (CON POP-UP) -->
+                <div class="core-services-grid">
+                    <article class="core-card" data-id="1">
+                        <i class="fas fa-comment-dots core-icon"></i>
+                        <h3>Chatbots 24/7</h3>
+                        <p>Atención al cliente automática que resuelve dudas al instante y captura leads mientras duermes.</p>
+                    </article>
+                    <article class="core-card" data-id="2">
+                        <i class="fas fa-chart-line core-icon"></i>
+                        <h3>Analítica Predictiva</h3>
+                        <p>Anticipa tendencias del mercado y toma decisiones basadas en datos reales, no en intuición.</p>
+                    </article>
+                    <article class="core-card" data-id="3">
+                        <i class="fas fa-shield-alt core-icon"></i>
+                        <h3>Ciberseguridad IA</h3>
+                        <p>Protección avanzada contra amenazas en tiempo real con detección y bloqueo automatizado.</p>
+                    </article>
                 </div>
 
-                <div class="category-block">
-                    <div class="category-title"><i class="fas fa-chart-line"></i> Datos & Analítica</div>
-                    <div class="category-grid">
-                        <article class="cat-card" data-id="2"><h3>Analítica Predictiva</h3><p>Anticipa tendencias y toma decisiones basadas en datos.</p></article>
-                        <article class="cat-card" data-id="11"><h3>Dashboards IA</h3><p>Visualiza tus KPIs en tiempo real de forma intuitiva.</p></article>
-                        <article class="cat-card" data-id="12"><h3>Procesamiento de Datos</h3><p>Análisis de grandes volúmenes con insights accionables.</p></article>
-                        <article class="cat-card" data-id="14"><h3>Procesa Documentos</h3><p>Extrae información clave de archivos automáticamente.</p></article>
-                    </div>
-                </div>
-
-                <div class="category-block">
-                    <div class="category-title"><i class="fas fa-shield-halved"></i> Infraestructura & Seguridad</div>
-                    <div class="category-grid">
-                        <article class="cat-card" data-id="3"><h3>Ciberseguridad IA</h3><p>Protección avanzada contra amenazas en tiempo real.</p></article>
-                        <article class="cat-card" data-id="6"><h3>SEO Inteligente</h3><p>Aparece primero en Google con optimización automática.</p></article>
-                        <article class="cat-card" data-id="8"><h3>Backups Automáticos</h3><p>Tus datos siempre seguros con copias diarias.</p></article>
-                        <article class="cat-card" data-id="9"><h3>Hosting Blindado</h3><p>Servidores rápidos y protegidos contra ataques.</p></article>
-                    </div>
-                </div>
-
-                <div class="category-block">
-                    <div class="category-title"><i class="fas fa-mobile-screen-button"></i> Apps & Contenido</div>
-                    <div class="category-grid">
-                        <article class="cat-card" data-id="7"><h3>Apps con IA</h3><p>Aplicaciones móviles inteligentes para tus usuarios.</p></article>
-                        <article class="cat-card" data-id="10"><h3>Correos Corporativos</h3><p>Email profesional con dominio propio y seguridad.</p></article>
-                        <article class="cat-card" data-id="13"><h3>Generación de Imágenes</h3><p>Crea contenido visual profesional con IA.</p></article>
+                <!-- ✅ LISTA SECUNDARIA COMPACTA (SIN POP-UP) -->
+                <div class="secondary-services">
+                    <h3>Otras soluciones disponibles</h3>
+                    <div class="secondary-grid">
+                        <div class="secondary-item"><i class="fas fa-robot"></i><div><strong>Automatización RPA</strong><span>Tareas repetitivas automatizadas</span></div></div>
+                        <div class="secondary-item"><i class="fas fa-globe"></i><div><strong>Webs con IA</strong><span>Sitios optimizados para conversión</span></div></div>
+                        <div class="secondary-item"><i class="fas fa-search"></i><div><strong>SEO Inteligente</strong><span>Posicionamiento orgánico automático</span></div></div>
+                        <div class="secondary-item"><i class="fas fa-mobile-alt"></i><div><strong>Apps con IA</strong><span>Aplicaciones móviles inteligentes</span></div></div>
+                        <div class="secondary-item"><i class="fas fa-database"></i><div><strong>Backups Automáticos</strong><span>Respaldo diario seguro en la nube</span></div></div>
+                        <div class="secondary-item"><i class="fas fa-cloud-upload-alt"></i><div><strong>Hosting Blindado</strong><span>Servidores rápidos y protegidos</span></div></div>
+                        <div class="secondary-item"><i class="fas fa-envelope"></i><div><strong>Correos Corporativos</strong><span>Email profesional con tu dominio</span></div></div>
+                        <div class="secondary-item"><i class="fas fa-chart-pie"></i><div><strong>Dashboards IA</strong><span>Visualización de KPIs en tiempo real</span></div></div>
+                        <div class="secondary-item"><i class="fas fa-microchip"></i><div><strong>Procesamiento de Datos</strong><span>Análisis de grandes volúmenes</span></div></div>
+                        <div class="secondary-item"><i class="fas fa-image"></i><div><strong>Generación de Imágenes</strong><span>Contenido visual profesional con IA</span></div></div>
+                        <div class="secondary-item"><i class="fas fa-file-alt"></i><div><strong>Procesa Documentos</strong><span>Extracción inteligente de información</span></div></div>
+                        <div class="secondary-item"><i class="fas fa-headset"></i><div><strong>Soporte 24/7</strong><span>Asistencia humana + chatbot</span></div></div>
                     </div>
                 </div>
             </div>
