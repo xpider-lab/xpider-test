@@ -28,7 +28,6 @@ document.addEventListener('DOMContentLoaded', function() {
         function drawParticles() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             
-            // Conexiones entre partículas cercanas
             for (let i = 0; i < particles.length; i++) {
                 for (let j = i + 1; j < particles.length; j++) {
                     const dx = particles[i].x - particles[j].x;
@@ -45,7 +44,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
             
-            // Partículas
             for (let p of particles) {
                 ctx.beginPath();
                 ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
@@ -93,7 +91,8 @@ document.addEventListener('DOMContentLoaded', function() {
             15: { icon: '<i class="fas fa-headset"></i>', title: 'Soporte 24/7', desc: 'Asistencia humana + chatbot siempre disponibles.', benefits: ['Atención 24/7', 'Respuesta inmediata', 'Equipo humano', 'Chatbot inteligente'], phrase: '"Nunca dejo a mis clientes solos"' }
         };
 
-        document.querySelectorAll('.service-card').forEach(card => {
+        // ✅ CORRECCIÓN: Ahora escucha clics en .cat-card (tu nueva clase)
+        document.querySelectorAll('.cat-card').forEach(card => {
             card.addEventListener('click', function() {
                 const id = this.getAttribute('data-id');
                 const data = servicesData[id];
@@ -107,7 +106,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 modal.style.display = 'flex';
                 setTimeout(() => modal.classList.add('active'), 10);
-                // ✅ SOLO EL ICONO FLOTA
                 setTimeout(() => modalIcon.classList.add('float-active'), 300);
                 document.body.style.overflow = 'hidden';
             });
@@ -115,7 +113,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
         function closeModal() {
             modal.classList.remove('active');
-            // ✅ QUITA EL EFECTO DEL ICONO
             modalIcon.classList.remove('float-active');
             setTimeout(() => {
                 modal.style.display = 'none';
