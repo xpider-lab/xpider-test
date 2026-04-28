@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // ✅ 1. PARTÍCULAS CON CONEXIONES
     const canvas = document.getElementById('particleCanvas');
     if (canvas) {
         const ctx = canvas.getContext('2d');
@@ -25,7 +24,6 @@ document.addEventListener('DOMContentLoaded', function() {
         window.addEventListener('resize', () => { resizeCanvas(); createParticles(); });
     }
 
-    // ✅ 2. MODAL (CAPTURA CUALQUIER ELEMENTO CON data-id)
     const modal = document.getElementById('modal');
     const modalContent = document.querySelector('.modal-content');
     const modalIcon = document.getElementById('modalIcon');
@@ -49,7 +47,6 @@ document.addEventListener('DOMContentLoaded', function() {
             15: { icon: '<i class="fas fa-headset"></i>', title: 'Soporte 24/7', desc: 'Asistencia humana + chatbot siempre disponibles.', benefits: ['Atención 24/7', 'Respuesta inmediata', 'Equipo humano', 'Chatbot inteligente'], phrase: '"Nunca dejo a mis clientes solos"' }
         };
 
-        // ✅ Event Delegation universal: captura clic en cualquier elemento con [data-id]
         document.addEventListener('click', function(e) {
             const card = e.target.closest('[data-id]');
             if (!card) return;
@@ -68,19 +65,15 @@ document.addEventListener('DOMContentLoaded', function() {
         document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
     }
 
-    // ✅ 3. FAQ ACORDEÓN
     document.querySelectorAll('.faq-question').forEach(q => q.addEventListener('click', () => q.parentElement.classList.toggle('active')));
 
-    // ✅ 4. CONTADORES
     function animateCounter(el) { if (!el) return; const target = parseInt(el.getAttribute('data-target'))||0, suffix = el.getAttribute('data-suffix')||''; let cur=0; const dur=2000, steps=60, inc=target/steps, t=dur/steps; const timer=setInterval(()=>{cur+=inc; if(cur>=target){el.textContent=target+suffix;clearInterval(timer);}else{el.textContent=Math.floor(cur)+suffix;}},t); }
     const counters = document.querySelectorAll('.resultado-number');
     if ('IntersectionObserver' in window && counters.length>0) { const obs=new IntersectionObserver(e=>e.forEach(en=>{if(en.isIntersecting){animateCounter(en.target);obs.unobserve(en.target);}}),{threshold:0.3,rootMargin:'0px 0px -50px 0px'}); counters.forEach(c=>obs.observe(c)); } else { counters.forEach(animateCounter); }
 
-    // ✅ 5. FORMULARIO
     const form = document.getElementById('contactForm');
     if (form) { form.addEventListener('submit', function(e) { e.preventDefault(); const n=document.getElementById('contactName').value.trim(), em=document.getElementById('contactEmail').value.trim(), t=document.getElementById('contactPhone').value.trim(); if(!n||!em){alert('Por favor completa tu nombre y email');return;} window.location.href=`mailto:xpidercl@gmail.com?subject=${encodeURIComponent('Contacto Xpider IA - '+n)}&body=${encodeURIComponent('Nombre: '+n+'\nEmail: '+em+'\nTeléfono: '+(t||'No especificado')+'\n\nMensaje enviado desde xpider.cl')}`; form.reset(); }); }
 
-    // ✅ 6. HEADER & FECHAS
     const header = document.querySelector('.site-header');
     if (header) window.addEventListener('scroll', () => header.style.boxShadow = window.scrollY > 50 ? '0 4px 6px rgba(0,0,0,0.1)' : 'none');
     const now = new Date(), copy = document.getElementById('copyright-text');
