@@ -75,7 +75,7 @@
         .section-subtitle { background: #dc2626; color: white; display: inline-block; padding: 0.3rem 1rem; border-radius: 50px; font-size: 0.7rem; letter-spacing: 2px; margin-bottom: 1rem; }
         .section-header h2 { font-size: 2.5rem; margin-bottom: 1rem; color: #111; }
         
-        /* ✅ OPCIÓN 3: 3 CORE + LISTA SECUNDARIA */
+        /* ✅ CORE SERVICES */
         .core-services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-bottom: 3.5rem; }
         .core-card { background: #fff; border: 2px solid #111; border-radius: 16px; padding: 2.5rem 2rem; text-align: center; cursor: pointer; transition: all 0.3s; position: relative; z-index: 2; pointer-events: auto; }
         .core-card:hover { border-color: #dc2626; transform: translateY(-8px); box-shadow: 0 15px 30px rgba(220,38,38,0.15); }
@@ -83,14 +83,18 @@
         .core-card h3 { font-size: 1.4rem; margin-bottom: 0.5rem; color: #111; }
         .core-card p { color: #555; line-height: 1.5; }
 
-        .secondary-services { background: #fafafa; border-radius: 12px; padding: 2rem; margin-top: 1rem; }
-        .secondary-services h3 { font-size: 1.2rem; margin-bottom: 1.5rem; text-align: center; color: #111; font-weight: 700; }
-        .secondary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.2rem; }
-        .secondary-item { display: flex; align-items: flex-start; gap: 0.8rem; padding: 0.8rem; border-radius: 8px; transition: background 0.2s; }
-        .secondary-item:hover { background: #fff; }
-        .secondary-item i { color: #dc2626; font-size: 1.1rem; margin-top: 0.2rem; flex-shrink: 0; }
-        .secondary-item strong { display: block; font-size: 1rem; color: #111; margin-bottom: 0.15rem; }
-        .secondary-item span { display: block; font-size: 0.85rem; color: #666; line-height: 1.3; }
+        /* ✅ SECUNDARY SERVICES: 3x4 GRID */
+        .secondary-services { background: #fafafa; border-radius: 12px; padding: 2.5rem 2rem; margin-top: 1rem; }
+        .secondary-services h3 { font-size: 1.3rem; margin-bottom: 2rem; text-align: center; color: #111; font-weight: 700; }
+        .secondary-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+        .secondary-card { 
+            background: #fff; border: 1px solid #e5e5e5; border-radius: 10px; padding: 1.3rem 1rem; 
+            text-align: center; cursor: pointer; transition: all 0.3s; position: relative; z-index: 2; pointer-events: auto;
+        }
+        .secondary-card:hover { border-color: #dc2626; transform: translateY(-5px); box-shadow: 0 10px 25px rgba(220,38,38,0.1); }
+        .secondary-card i { font-size: 1.8rem; color: #dc2626; margin-bottom: 0.5rem; display: block; }
+        .secondary-card h4 { font-size: 1rem; margin: 0 0 0.3rem; color: #111; }
+        .secondary-card p { font-size: 0.82rem; color: #666; margin: 0; line-height: 1.3; }
 
         .resultados-section { background: #000000; color: #FFFFFF; padding: 5rem 0; border-top: 4px solid #dc2626; border-bottom: 4px solid #dc2626; }
         .resultados-container { max-width: 1380px; margin: 0 auto; padding: 0 30px; }
@@ -153,10 +157,11 @@
             .modal-content { width: 95%; padding: 1.5rem; }
             .hero-description { font-size: 1.15rem; padding: 1.25rem 1.5rem; }
             .core-services-grid { grid-template-columns: 1fr; }
-            .secondary-grid { grid-template-columns: 1fr; }
+            .secondary-grid { grid-template-columns: repeat(2, 1fr); }
         }
+        @media (max-width: 550px) { .secondary-grid { grid-template-columns: 1fr; } }
         @media (max-width: 480px) { .resultados-grid { grid-template-columns: 1fr; } .resultado-number { font-size: 2.2rem; } }
-        #inicio, #servicios, #resultados, #contacto { scroll-margin-top: 100px; }
+        #inicio, #servicios, #resultados, #contacto, #faq { scroll-margin-top: 100px; }
     </style>
 </head>
 <body>
@@ -167,7 +172,13 @@
                 <span class="logo-text">XPIDER<span>_</span><span>IA</span></span>
             </a>
             <nav class="main-nav" aria-label="Navegación principal">
-                <ul><li><a href="#inicio">Inicio</a></li><li><a href="#servicios">Servicios</a></li><li><a href="#resultados">Resultados</a></li><li><a href="#contacto">Contacto</a></li></ul>
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#servicios">Servicios</a></li>
+                    <li><a href="#resultados">Resultados</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                    <li><a href="#faq">FAQ</a></li> <!-- ✅ MENÚ ACTUALIZADO -->
+                </ul>
             </nav>
             <a href="https://wa.me/56949753236" class="btn-whatsapp wa-desktop" id="waButton" target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
         </div>
@@ -194,39 +205,27 @@
                 
                 <!-- ✅ 3 CORE DESTACADOS (CON POP-UP) -->
                 <div class="core-services-grid">
-                    <article class="core-card" data-id="1">
-                        <i class="fas fa-comment-dots core-icon"></i>
-                        <h3>Chatbots 24/7</h3>
-                        <p>Atención al cliente automática que resuelve dudas al instante y captura leads mientras duermes.</p>
-                    </article>
-                    <article class="core-card" data-id="2">
-                        <i class="fas fa-chart-line core-icon"></i>
-                        <h3>Analítica Predictiva</h3>
-                        <p>Anticipa tendencias del mercado y toma decisiones basadas en datos reales, no en intuición.</p>
-                    </article>
-                    <article class="core-card" data-id="3">
-                        <i class="fas fa-shield-alt core-icon"></i>
-                        <h3>Ciberseguridad IA</h3>
-                        <p>Protección avanzada contra amenazas en tiempo real con detección y bloqueo automatizado.</p>
-                    </article>
+                    <article class="core-card" data-id="1"><i class="fas fa-comment-dots core-icon"></i><h3>Chatbots 24/7</h3><p>Atención al cliente automática que resuelve dudas al instante y captura leads mientras duermes.</p></article>
+                    <article class="core-card" data-id="2"><i class="fas fa-chart-line core-icon"></i><h3>Analítica Predictiva</h3><p>Anticipa tendencias del mercado y toma decisiones basadas en datos reales, no en intuición.</p></article>
+                    <article class="core-card" data-id="3"><i class="fas fa-shield-alt core-icon"></i><h3>Ciberseguridad IA</h3><p>Protección avanzada contra amenazas en tiempo real con detección y bloqueo automatizado.</p></article>
                 </div>
 
-                <!-- ✅ LISTA SECUNDARIA COMPACTA (SIN POP-UP) -->
+                <!-- ✅ 12 SECUNDARIOS: 3 FILAS x 4 COLUMNAS (CON POP-UP) -->
                 <div class="secondary-services">
                     <h3>Otras soluciones disponibles</h3>
                     <div class="secondary-grid">
-                        <div class="secondary-item"><i class="fas fa-robot"></i><div><strong>Automatización RPA</strong><span>Tareas repetitivas automatizadas</span></div></div>
-                        <div class="secondary-item"><i class="fas fa-globe"></i><div><strong>Webs con IA</strong><span>Sitios optimizados para conversión</span></div></div>
-                        <div class="secondary-item"><i class="fas fa-search"></i><div><strong>SEO Inteligente</strong><span>Posicionamiento orgánico automático</span></div></div>
-                        <div class="secondary-item"><i class="fas fa-mobile-alt"></i><div><strong>Apps con IA</strong><span>Aplicaciones móviles inteligentes</span></div></div>
-                        <div class="secondary-item"><i class="fas fa-database"></i><div><strong>Backups Automáticos</strong><span>Respaldo diario seguro en la nube</span></div></div>
-                        <div class="secondary-item"><i class="fas fa-cloud-upload-alt"></i><div><strong>Hosting Blindado</strong><span>Servidores rápidos y protegidos</span></div></div>
-                        <div class="secondary-item"><i class="fas fa-envelope"></i><div><strong>Correos Corporativos</strong><span>Email profesional con tu dominio</span></div></div>
-                        <div class="secondary-item"><i class="fas fa-chart-pie"></i><div><strong>Dashboards IA</strong><span>Visualización de KPIs en tiempo real</span></div></div>
-                        <div class="secondary-item"><i class="fas fa-microchip"></i><div><strong>Procesamiento de Datos</strong><span>Análisis de grandes volúmenes</span></div></div>
-                        <div class="secondary-item"><i class="fas fa-image"></i><div><strong>Generación de Imágenes</strong><span>Contenido visual profesional con IA</span></div></div>
-                        <div class="secondary-item"><i class="fas fa-file-alt"></i><div><strong>Procesa Documentos</strong><span>Extracción inteligente de información</span></div></div>
-                        <div class="secondary-item"><i class="fas fa-headset"></i><div><strong>Soporte 24/7</strong><span>Asistencia humana + chatbot</span></div></div>
+                        <article class="secondary-card" data-id="4"><i class="fas fa-robot"></i><h4>Automatización RPA</h4><p>Tareas repetitivas automatizadas</p></article>
+                        <article class="secondary-card" data-id="5"><i class="fas fa-globe"></i><h4>Webs con IA</h4><p>Sitios optimizados para conversión</p></article>
+                        <article class="secondary-card" data-id="6"><i class="fas fa-search"></i><h4>SEO Inteligente</h4><p>Posicionamiento orgánico automático</p></article>
+                        <article class="secondary-card" data-id="7"><i class="fas fa-mobile-alt"></i><h4>Apps con IA</h4><p>Aplicaciones móviles inteligentes</p></article>
+                        <article class="secondary-card" data-id="8"><i class="fas fa-database"></i><h4>Backups Automáticos</h4><p>Respaldo diario seguro en la nube</p></article>
+                        <article class="secondary-card" data-id="9"><i class="fas fa-cloud-upload-alt"></i><h4>Hosting Blindado</h4><p>Servidores rápidos y protegidos</p></article>
+                        <article class="secondary-card" data-id="10"><i class="fas fa-envelope"></i><h4>Correos Corporativos</h4><p>Email profesional con tu dominio</p></article>
+                        <article class="secondary-card" data-id="11"><i class="fas fa-chart-pie"></i><h4>Dashboards IA</h4><p>Visualización de KPIs en tiempo real</p></article>
+                        <article class="secondary-card" data-id="12"><i class="fas fa-microchip"></i><h4>Procesamiento de Datos</h4><p>Análisis de grandes volúmenes</p></article>
+                        <article class="secondary-card" data-id="13"><i class="fas fa-image"></i><h4>Generación de Imágenes</h4><p>Contenido visual profesional con IA</p></article>
+                        <article class="secondary-card" data-id="14"><i class="fas fa-file-alt"></i><h4>Procesa Documentos</h4><p>Extracción inteligente de información</p></article>
+                        <article class="secondary-card" data-id="15"><i class="fas fa-headset"></i><h4>Soporte 24/7</h4><p>Asistencia humana + chatbot</p></article>
                     </div>
                 </div>
             </div>
