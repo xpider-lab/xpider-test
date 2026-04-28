@@ -27,7 +27,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
         function drawParticles() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
             for (let i = 0; i < particles.length; i++) {
                 for (let j = i + 1; j < particles.length; j++) {
                     const dx = particles[i].x - particles[j].x;
@@ -43,7 +42,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 }
             }
-            
             for (let p of particles) {
                 ctx.beginPath();
                 ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
@@ -62,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
         window.addEventListener('resize', () => { resizeCanvas(); createParticles(); });
     }
 
-    // ✅ 2. MODAL CON ICONO FLOTANTE (SOLO EL ICONO)
+    // ✅ 2. MODAL (USANDO EVENT DELEGATION PARA GARANTIZAR FUNCIONAMIENTO EN PC Y MÓVIL)
     const modal = document.getElementById('modal');
     const modalContent = document.querySelector('.modal-content');
     const modalIcon = document.getElementById('modalIcon');
@@ -91,24 +89,27 @@ document.addEventListener('DOMContentLoaded', function() {
             15: { icon: '<i class="fas fa-headset"></i>', title: 'Soporte 24/7', desc: 'Asistencia humana + chatbot siempre disponibles.', benefits: ['Atención 24/7', 'Respuesta inmediata', 'Equipo humano', 'Chatbot inteligente'], phrase: '"Nunca dejo a mis clientes solos"' }
         };
 
-        // ✅ CORRECCIÓN: Ahora escucha clics en .cat-card (tu nueva clase)
-        document.querySelectorAll('.cat-card').forEach(card => {
-            card.addEventListener('click', function() {
-                const id = this.getAttribute('data-id');
-                const data = servicesData[id];
-                if (!data) return;
+        // ✅ Event Delegation: captura clics en todo el documento y filtra por .cat-card
+        document.addEventListener('click', function(e) {
+            const card = e.target.closest('.cat-card');
+            if (!card) return;
+            
+            const id = card.getAttribute('data-id');
+            const data = servicesData[id];
+            if (!data) return;
 
-                modalIcon.innerHTML = data.icon;
-                modalTitle.textContent = data.title;
-                modalDesc.textContent = data.desc;
-                modalBenefits.innerHTML = data.benefits.map(b => `<li><i class="fas fa-check-circle"></i> ${b}</li>`).join('');
-                modalPhrase.innerHTML = `<i class="fas fa-quote-left"></i> ${data.phrase}`;
+            modalIcon.innerHTML = data.icon;
+            modalTitle.textContent = data.title;
+            modalDesc.textContent = data.desc;
+            modalBenefits.innerHTML = data.benefits.map(b => `<li><i class="fas fa-check-circle"></i> ${b}</li>`).join('');
+            modalPhrase.innerHTML = `<i class="fas fa-quote-left"></i> ${data.phrase}`;
 
-                modal.style.display = 'flex';
-                setTimeout(() => modal.classList.add('active'), 10);
-                setTimeout(() => modalIcon.classList.add('float-active'), 300);
-                document.body.style.overflow = 'hidden';
-            });
+            modal.style.display = 'flex';
+            // Forzar reflow para que la transición CSS funcione en todos los navegadores
+            void modal.offsetWidth; 
+            modal.classList.add('active');
+            setTimeout(() => modalIcon.classList.add('float-active'), 50);
+            document.body.style.overflow = 'hidden';
         });
 
         function closeModal() {
