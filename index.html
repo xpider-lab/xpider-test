@@ -65,7 +65,7 @@
         .wa-mobile { display: none; margin: 1.5rem auto 0; padding: 0.6rem 1.2rem; font-size: 0.9rem; width: fit-content; background: transparent; color: #dc2626; border: 1px solid #dc2626; }
         .wa-mobile:hover { background: #dc2626; color: white; }
         .hero { position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; background: #ffffff; padding-top: 80px; overflow: hidden; }
-        #particleCanvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: block; z-index: 1; }
+        .particle-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: block; z-index: 1; pointer-events: none; }
         .hero-content { position: relative; z-index: 10; max-width: 900px; padding: 2rem; }
         .hero-badge { background: #dc2626; color: white; display: inline-block; padding: 0.5rem 1.25rem; border-radius: 50px; font-size: 0.75rem; font-weight: 800; letter-spacing: 2px; margin-bottom: 1.5rem; }
         .hero-title { font-size: 3.5rem; font-weight: 900; margin-bottom: 1.5rem; color: #111; }
@@ -81,11 +81,12 @@
         .scroll-indicator { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0.5rem; color: #dc2626; z-index: 5; animation: bounce 2s infinite; }
         @keyframes bounce { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(8px); } }
         @media (max-height: 700px) { .scroll-indicator { display: none; } }
-        section { padding: 80px 0; }
+        section { padding: 80px 0; position: relative; }
         .container { max-width: 1380px; margin: 0 auto; padding: 0 30px; }
         .section-header { text-align: center; margin-bottom: 50px; }
         .section-subtitle { background: #dc2626; color: white; display: inline-block; padding: 0.3rem 1rem; border-radius: 50px; font-size: 0.7rem; letter-spacing: 2px; margin-bottom: 1rem; }
-        .section-header h2 { font-size: 2.5rem; margin-bottom: 1rem; color: #111; }
+        .section-header h2 { font-size: 2.5rem; margin-bottom: 0.5rem; color: #111; }
+        .section-header p { color: #555; max-width: 700px; margin: 0 auto; }
         
         .pillars-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
         .pillar-card { background: white; border: 1px solid #eee; border-radius: 16px; padding: 2.5rem; transition: all 0.3s; position: relative; overflow: hidden; cursor: pointer; }
@@ -115,19 +116,19 @@
         .cta-ia a { background: #dc2626; color: #fff; padding: 14px 28px; text-decoration: none; border-radius: 8px; font-weight: bold; transition: background 0.3s; display: inline-block; }
         .cta-ia a:hover { background: #b91c1c; }
 
-        .resultados-section { background: #000000; color: #FFFFFF; padding: 5rem 0; border-top: 4px solid #dc2626; border-bottom: 4px solid #dc2626; }
-        .resultados-container { max-width: 1380px; margin: 0 auto; padding: 0 30px; }
+        .resultados-section { background: #ffffff; color: #111111; padding: 5rem 0; border-top: 2px solid #dc2626; border-bottom: 2px solid #dc2626; position: relative; overflow: hidden; }
+        .resultados-container { position: relative; z-index: 2; max-width: 1380px; margin: 0 auto; padding: 0 30px; }
         .resultados-header { text-align: center; margin-bottom: 3.5rem; }
-        .resultados-header h2 { color: #FFFFFF; font-size: 2.5rem; margin-bottom: 0.5rem; }
+        .resultados-header h2 { color: #111111; font-size: 2.5rem; margin-bottom: 0.5rem; }
         .resultados-header .divider { width: 80px; height: 4px; background: #dc2626; margin: 1rem auto; border-radius: 2px; }
-        .resultados-header p { color: #cccccc; max-width: 600px; margin: 0 auto; }
+        .resultados-header p { color: #555555; max-width: 600px; margin: 0 auto; }
         .resultados-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
-        .resultado-card { background: #111111; border: 2px solid #dc2626; border-radius: 16px; padding: 2rem 1.5rem; text-align: center; transition: all 0.3s ease; }
-        .resultado-card:hover { transform: translateY(-8px); box-shadow: 0 15px 40px rgba(220, 38, 38, 0.35); border-color: #ff4d4d; }
+        .resultado-card { background: #ffffff; border: 2px solid #dc2626; border-radius: 16px; padding: 2rem 1.5rem; text-align: center; transition: all 0.3s ease; }
+        .resultado-card:hover { transform: translateY(-8px); box-shadow: 0 15px 40px rgba(220, 38, 38, 0.15); border-color: #ff4d4d; }
         .resultado-icon { font-size: 2.5rem; color: #dc2626; margin-bottom: 1rem; }
         .resultado-number { font-size: 3.2rem; font-weight: 900; color: #dc2626; line-height: 1; margin: 0.5rem 0; }
-        .resultado-label { color: #FFFFFF; font-weight: 600; font-size: 1.05rem; text-transform: uppercase; letter-spacing: 1px; }
-        .resultado-desc { color: #b3b3b3; font-size: 0.9rem; margin-top: 0.5rem; }
+        .resultado-label { color: #111111; font-weight: 700; font-size: 1.05rem; text-transform: uppercase; letter-spacing: 1px; }
+        .resultado-desc { color: #555555; font-size: 0.9rem; margin-top: 0.5rem; }
 
         .faq-grid { max-width: 800px; margin: 0 auto; }
         .faq-item { border: 2px solid #111; border-radius: 12px; margin-bottom: 1rem; overflow: hidden; }
@@ -189,7 +190,7 @@
             .resultados-grid { grid-template-columns: 1fr; } 
             .resultado-number { font-size: 2.2rem; } 
         }
-        #inicio, #soluciones, #resultados, #contacto, #faq, #capacitacion-ia { scroll-margin-top: 100px; }
+        #inicio, #soluciones, #resultados, #contacto, #faq, #capacitacion-ia { scroll-margin-top: 110px; }
     </style>
 </head>
 <body>
@@ -215,7 +216,7 @@
 
     <main>
         <section class="hero" id="inicio">
-            <canvas id="particleCanvas" aria-hidden="true"></canvas>
+            <canvas class="particle-canvas" aria-hidden="true"></canvas>
             <div class="hero-content">
                 <div class="hero-badge">LA REVOLUCIÓN DE LA IA HA LLEGADO</div>
                 <h1 class="hero-title">Inteligencia Artificial que transforma tu negocio</h1>
@@ -235,77 +236,32 @@
                     <h2>3 Pilares para la Transformación Digital</h2>
                     <p>No vendemos herramientas sueltas. Implementamos ecosistemas integrados para escalar tu negocio.</p>
                 </div>
-                
                 <div class="pillars-grid">
-                    <div class="pillar-card" data-id="100">
-                        <i class="fas fa-bolt pillar-icon"></i>
-                        <h3>Automatización Inteligente</h3>
-                        <p>Elimina tareas manuales y escala tu operación sin aumentar costos.</p>
-                        <ul class="pillar-list">
-                            <li><i class="fas fa-check"></i> Chatbots 24/7 (WhatsApp/Web)</li>
-                            <li><i class="fas fa-check"></i> Automatización RPA (Procesos)</li>
-                            <li><i class="fas fa-check"></i> Webs con IA (Landing Sites)</li>
-                            <li><i class="fas fa-check"></i> Apps Móviles con IA</li>
-                        </ul>
-                    </div>
-                    <div class="pillar-card" data-id="101">
-                        <i class="fas fa-chart-line pillar-icon"></i>
-                        <h3>Datos & Estrategia</h3>
-                        <p>Convierte información en decisiones rentables y visibles.</p>
-                        <ul class="pillar-list">
-                            <li><i class="fas fa-check"></i> Analítica Predictiva</li>
-                            <li><i class="fas fa-check"></i> Dashboards de KPIs</li>
-                            <li><i class="fas fa-check"></i> SEO Inteligente</li>
-                            <li><i class="fas fa-check"></i> Procesamiento de Documentos</li>
-                        </ul>
-                    </div>
-                    <div class="pillar-card" data-id="102">
-                        <i class="fas fa-shield-alt pillar-icon"></i>
-                        <h3>Seguridad & Soporte</h3>
-                        <p>Protege tus activos y mantén tu operación siempre encendida.</p>
-                        <ul class="pillar-list">
-                            <li><i class="fas fa-check"></i> Ciberseguridad IA</li>
-                            <li><i class="fas fa-check"></i> Hosting Blindado</li>
-                            <li><i class="fas fa-check"></i> Backups Automáticos</li>
-                            <li><i class="fas fa-check"></i> Soporte 24/7 + Correos Corp</li>
-                        </ul>
-                    </div>
+                    <div class="pillar-card" data-id="100"><i class="fas fa-bolt pillar-icon"></i><h3>Automatización Inteligente</h3><p>Elimina tareas manuales y escala tu operación sin aumentar costos.</p><ul class="pillar-list"><li><i class="fas fa-check"></i> Chatbots 24/7 (WhatsApp/Web)</li><li><i class="fas fa-check"></i> Automatización RPA (Procesos)</li><li><i class="fas fa-check"></i> Webs con IA (Landing Sites)</li><li><i class="fas fa-check"></i> Apps Móviles con IA</li></ul></div>
+                    <div class="pillar-card" data-id="101"><i class="fas fa-chart-line pillar-icon"></i><h3>Datos & Estrategia</h3><p>Convierte información en decisiones rentables y visibles.</p><ul class="pillar-list"><li><i class="fas fa-check"></i> Analítica Predictiva</li><li><i class="fas fa-check"></i> Dashboards de KPIs</li><li><i class="fas fa-check"></i> SEO Inteligente</li><li><i class="fas fa-check"></i> Procesamiento de Documentos</li></ul></div>
+                    <div class="pillar-card" data-id="102"><i class="fas fa-shield-alt pillar-icon"></i><h3>Seguridad & Soporte</h3><p>Protege tus activos y mantén tu operación siempre encendida.</p><ul class="pillar-list"><li><i class="fas fa-check"></i> Ciberseguridad IA</li><li><i class="fas fa-check"></i> Hosting Blindado</li><li><i class="fas fa-check"></i> Backups Automáticos</li><li><i class="fas fa-check"></i> Soporte 24/7 + Correos Corp</li></ul></div>
                 </div>
             </div>
         </section>
 
         <section id="capacitacion-ia" class="section-ia">
-            <h1>Servicios de Inteligencia Artificial para Empresas</h1>
-            <p class="subtitle">Ayudamos a empresas a integrar inteligencia artificial en sus procesos para aumentar la productividad, reducir costos y mejorar la toma de decisiones con soluciones reales y aplicadas.</p>
-            <div class="grid-ia">
-                <div class="card-ia" data-id="1">
-                    <h3>Talleres Prácticos</h3>
-                    <p>Capacitaciones intensivas orientadas a resultados rápidos y aplicables desde el primer día.</p>
-                    <ul><li>Uso de IA en tareas reales del negocio</li><li>Herramientas como ChatGPT</li><li>Automatización de procesos repetitivos</li><li>Casos prácticos según industria</li></ul>
-                    <p><strong>Duración:</strong> 2 a 8 horas</p>
+            <div class="container">
+                <div class="section-subtitle">CAPACITACIÓN + CONSULTORÍA</div>
+                <h1>Servicios de Inteligencia Artificial para Empresas</h1>
+                <p class="subtitle">Ayudamos a empresas a integrar inteligencia artificial en sus procesos para aumentar la productividad, reducir costos y mejorar la toma de decisiones con soluciones reales y aplicadas.</p>
+                <div class="grid-ia">
+                    <div class="card-ia" data-id="1"><h3>Talleres Prácticos</h3><p>Capacitaciones intensivas orientadas a resultados rápidos y aplicables desde el primer día.</p><ul><li>Uso de IA en tareas reales del negocio</li><li>Herramientas como ChatGPT</li><li>Automatización de procesos repetitivos</li><li>Casos prácticos según industria</li></ul><p><strong>Duración:</strong> 2 a 8 horas</p></div>
+                    <div class="card-ia" data-id="2"><h3>Programas de Capacitación</h3><p>Formación estructurada para incorporar inteligencia artificial dentro de la empresa.</p><ul><li>Fundamentos de IA y transformación digital</li><li>Automatización de procesos internos</li><li>Cultura digital y gestión del cambio</li><li>Toma de decisiones basada en datos</li></ul><p><strong>Duración:</strong> 4 a 8 semanas</p></div>
+                    <div class="card-ia" data-id="3"><h3>Consultoría e Implementación</h3><p>Servicio estratégico enfocado en resultados reales y medibles dentro del negocio.</p><ul><li>Diagnóstico digital de la empresa</li><li>Identificación de oportunidades con IA</li><li>Implementación de automatizaciones y chatbots</li><li>Creación de dashboards y seguimiento</li><li>Acompañamiento continuo</li></ul></div>
+                    <div class="card-ia" data-id="4"><h3>Charlas Ejecutivas</h3><p>Instancias estratégicas para líderes que buscan entender el impacto real de la IA.</p><ul><li>Tendencias actuales en inteligencia artificial</li><li>Impacto en distintas industrias</li><li>Oportunidades para la empresa</li><li>Roadmap de transformación digital</li></ul></div>
                 </div>
-                <div class="card-ia" data-id="2">
-                    <h3>Programas de Capacitación</h3>
-                    <p>Formación estructurada para incorporar inteligencia artificial dentro de la empresa.</p>
-                    <ul><li>Fundamentos de IA y transformación digital</li><li>Automatización de procesos internos</li><li>Cultura digital y gestión del cambio</li><li>Toma de decisiones basada en datos</li></ul>
-                    <p><strong>Duración:</strong> 4 a 8 semanas</p>
-                </div>
-                <div class="card-ia" data-id="3">
-                    <h3>Consultoría e Implementación</h3>
-                    <p>Servicio estratégico enfocado en resultados reales y medibles dentro del negocio.</p>
-                    <ul><li>Diagnóstico digital de la empresa</li><li>Identificación de oportunidades con IA</li><li>Implementación de automatizaciones y chatbots</li><li>Creación de dashboards y seguimiento</li><li>Acompañamiento continuo</li></ul>
-                </div>
-                <div class="card-ia" data-id="4">
-                    <h3>Charlas Ejecutivas</h3>
-                    <p>Instancias estratégicas para líderes que buscan entender el impacto real de la IA.</p>
-                    <ul><li>Tendencias actuales en inteligencia artificial</li><li>Impacto en distintas industrias</li><li>Oportunidades para la empresa</li><li>Roadmap de transformación digital</li></ul>
-                </div>
+                <div class="highlight-ia">"No enseñamos IA. La implementamos contigo."</div>
+                <div class="cta-ia"><a href="#contacto">Solicitar Información</a></div>
             </div>
-            <div class="highlight-ia">"No enseñamos IA. La implementamos contigo."</div>
-            <div class="cta-ia"><a href="#contacto">Solicitar Información</a></div>
         </section>
 
-        <section class="resultados-section" id="resultados">
+        <section id="resultados" class="resultados-section">
+            <canvas class="particle-canvas" aria-hidden="true"></canvas>
             <div class="resultados-container">
                 <div class="resultados-header"><h2>Nuestros Resultados</h2><div class="divider"></div><p>Métricas que respaldan nuestro compromiso con la excelencia</p></div>
                 <div class="resultados-grid" role="list">
@@ -319,7 +275,11 @@
 
         <section id="faq">
             <div class="container">
-                <div class="section-header"><div class="section-subtitle">PREGUNTAS FRECUENTES</div><h2>Preguntas frecuentes</h2><p>Todo lo que necesitas saber</p></div>
+                <div class="section-header">
+                    <div class="section-subtitle">FAQ</div>
+                    <h2>Preguntas Frecuentes</h2>
+                    <p>Respuestas claras sobre implementación, inversión, seguridad y soporte técnico.</p>
+                </div>
                 <div class="faq-grid">
                     <div class="faq-item"><div class="faq-question" role="button" tabindex="0" aria-expanded="false"><span>¿Qué es la inteligencia artificial?</span><i class="fas fa-plus"></i></div><div class="faq-answer" role="region"><p>La IA es la capacidad de sistemas computacionales para realizar tareas que tradicionalmente requieren inteligencia humana, como el aprendizaje, el razonamiento, la percepción y la toma de decisiones.</p></div></div>
                     <div class="faq-item"><div class="faq-question" role="button" tabindex="0" aria-expanded="false"><span>¿Cómo puede ayudar la IA a mi negocio?</span><i class="fas fa-plus"></i></div><div class="faq-answer" role="region"><p>La IA automatiza tareas repetitivas, analiza grandes volúmenes de datos para predecir tendencias, mejora la experiencia del cliente mediante chatbots y optimiza procesos operativos reduciendo costos hasta en un 40%.</p></div></div>
