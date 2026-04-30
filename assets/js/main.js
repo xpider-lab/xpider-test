@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
         window.addEventListener('resize', () => { resizeCanvas(); createParticles(); });
     }
 
-    // ✅ 2. MODAL UNIVERSAL (CAPACITA PILARES + SOLUCIONES + CAPACITACIÓN)
+    // ✅ 2. MODAL UNIVERSAL CON PROBLEMA + SOLUCIÓN
     const modal = document.getElementById('modal');
     const modalContent = document.querySelector('.modal-content');
     const modalIcon = document.getElementById('modalIcon');
@@ -37,27 +37,67 @@ document.addEventListener('DOMContentLoaded', function() {
         const modalPhrase = document.getElementById('modalPhrase');
 
         const servicesData = {
-            1: { icon: '<i class="fas fa-bolt"></i>', title: 'Talleres Prácticos', desc: 'Capacitaciones intensivas orientadas a resultados rápidos y aplicables desde el primer día.', benefits: ['Uso de IA en tareas reales del negocio', 'Herramientas como ChatGPT', 'Automatización de procesos repetitivos', 'Casos prácticos según industria'], phrase: '"Aprende haciendo, implementa desde el día 1."' },
-            2: { icon: '<i class="fas fa-graduation-cap"></i>', title: 'Programas de Capacitación', desc: 'Formación estructurada para incorporar inteligencia artificial dentro de la empresa.', benefits: ['Fundamentos de IA y transformación digital', 'Automatización de procesos internos', 'Cultura digital y gestión del cambio', 'Toma de decisiones basada en datos'], phrase: '"El conocimiento es poder, pero la aplicación es rentabilidad."' },
-            3: { icon: '<i class="fas fa-rocket"></i>', title: 'Consultoría e Implementación', desc: 'Servicio estratégico enfocado en resultados reales y medibles dentro del negocio.', benefits: ['Diagnóstico digital de la empresa', 'Identificación de oportunidades con IA', 'Implementación de automatizaciones y chatbots', 'Acompañamiento continuo'], phrase: '"No solo te damos un mapa, te acompañamos en el viaje."' },
-            4: { icon: '<i class="fas fa-microphone-alt"></i>', title: 'Charlas Ejecutivas', desc: 'Instancias estratégicas para líderes que buscan entender el impacto real de la IA.', benefits: ['Tendencias actuales en inteligencia artificial', 'Impacto en distintas industrias', 'Oportunidades para la empresa', 'Roadmap de transformación digital'], phrase: '"El futuro pertenece a quienes se preparan para él hoy."' },
-            100: { icon: '<i class="fas fa-bolt"></i>', title: 'Automatización Inteligente', desc: 'Elimina tareas manuales y escala tu operación sin aumentar costos de personal.', benefits: ['Chatbots 24/7 integrados a WhatsApp y Web', 'Automatización RPA para procesos repetitivos', 'Desarrollo de Webs optimizadas con IA', 'Aplicaciones móviles inteligentes y escalables'], phrase: '"La automatización es el superpoder de los negocios modernos."' },
-            101: { icon: '<i class="fas fa-chart-line"></i>', title: 'Datos & Estrategia', desc: 'Convierte información dispersa en decisiones rentables y altamente visibles.', benefits: ['Analítica Predictiva para anticipar tendencias', 'Dashboards interactivos de KPIs en tiempo real', 'SEO Inteligente para posicionamiento orgánico', 'Procesamiento inteligente de documentos y datos'], phrase: '"Sin datos, solo eres una persona más con una opinión."' },
-            102: { icon: '<i class="fas fa-shield-alt"></i>', title: 'Seguridad & Soporte', desc: 'Protege tus activos digitales y mantén tu operación encendida 24/7.', benefits: ['Ciberseguridad IA con detección proactiva', 'Hosting Blindado con alta disponibilidad', 'Backups automáticos inmutables y seguros', 'Soporte técnico 24/7 + Correos corporativos'], phrase: '"La seguridad no es un gasto, es tu seguro de vida digital."' }
+            100: { 
+                icon: '<i class="fas fa-bolt"></i>', 
+                title: 'Automatización Inteligente', 
+                desc: `<strong>🔹 PROBLEMA:</strong> Tu equipo pierde 15+ horas semanales en tareas repetitivas (respuestas manuales, facturación, carga de datos). La saturación frena el crecimiento y genera errores costosos.<br><br><strong>✅ SOLUCIÓN:</strong> Implementamos chatbots con IA 24/7, automatizamos flujos con RPA e integramos tus herramientas. Resultado: tu equipo se enfoca en vender y crecer, mientras la IA ejecuta lo operativo.`, 
+                benefits: ['Atención 24/7 sin aumentar nómina', 'Eliminación de errores humanos', 'Integración con WhatsApp/Web/CRM', 'Escalabilidad inmediata'], 
+                phrase: '"La automatización es el superpoder de los negocios modernos."' 
+            },
+            101: { 
+                icon: '<i class="fas fa-chart-line"></i>', 
+                title: 'Datos & Estrategia', 
+                desc: `<strong>🔹 PROBLEMA:</strong> Tienes datos dispersos en hojas de cálculo y sistemas desconectados. No sabes qué producto se venderá, ni por qué pierdes tráfico web, ni cómo optimizar tu presupuesto.<br><br><strong>✅ SOLUCIÓN:</strong> Centralizamos tu información en dashboards en tiempo real, aplicamos analítica predictiva y optimizamos tu SEO con IA. Resultado: decisiones basadas en evidencia, con ROI medible.`, 
+                benefits: ['Predicciones con +85% de precisión', 'Visualización de KPIs en tiempo real', 'Posicionamiento orgánico automatizado', 'Reportes ejecutivos automáticos'], 
+                phrase: '"Sin datos, solo eres una persona más con una opinión."' 
+            },
+            102: { 
+                icon: '<i class="fas fa-shield-alt"></i>', 
+                title: 'Seguridad & Soporte', 
+                desc: `<strong>🔹 PROBLEMA:</strong> Una caída de servidor, un ataque de ransomware o un error humano pone en riesgo datos críticos. Sin backups ni soporte rápido, pierdes dinero y credibilidad.<br><br><strong>✅ SOLUCIÓN:</strong> Blindamos tu infraestructura con ciberseguridad IA, hosting de alta disponibilidad, backups inmutables y soporte 24/7 real. Resultado: operaciones seguras, cero downtime y presencia profesional.`, 
+                benefits: ['Detección y bloqueo proactivo de amenazas', 'Uptime garantizado 99.9%', 'Recuperación ante desastres en minutos', 'Correos corporativos seguros con tu dominio'], 
+                phrase: '"La seguridad no es un gasto, es tu seguro de vida digital."' 
+            },
+            1: { 
+                icon: '<i class="fas fa-bolt"></i>', 
+                title: 'Talleres Prácticos', 
+                desc: `<strong>🔹 PROBLEMA:</strong> Tu equipo escucha sobre IA a diario, pero al momento de usar herramientas o automatizar tareas, no saben por dónde empezar. Pierden tiempo probando al azar.<br><br><strong>✅ SOLUCIÓN:</strong> Entregamos sesiones 100% prácticas adaptadas a tu industria. Tus colaboradores salen con flujos listos, prompts optimizados y casos reales aplicados a su trabajo.`, 
+                benefits: ['Aprendizaje hands-on desde el día 1', 'Casos reales de tu industria', 'Plantillas y herramientas listas para usar', 'Resultados medibles en la primera semana'], 
+                phrase: '"Aprende haciendo, implementa desde el día 1."' 
+            },
+            2: { 
+                icon: '<i class="fas fa-graduation-cap"></i>', 
+                title: 'Programas de Capacitación', 
+                desc: `<strong>🔹 PROBLEMA:</strong> La empresa quiere digitalizarse, pero hay resistencia al cambio, falta cultura data-driven y los procesos siguen anclados en métodos manuales.<br><br><strong>✅ SOLUCIÓN:</strong> Ejecutamos un programa estructurado (4-8 semanas) que transforma mentalidades y procesos. Incluye IA aplicada, gestión del cambio y un proyecto piloto real en tu empresa.`, 
+                benefits: ['Transformación cultural guiada', 'Proyecto piloto con resultados reales', 'Certificación de competencias', 'Equipo alineado y autónomo'], 
+                phrase: '"El conocimiento es poder, pero la aplicación es rentabilidad."' 
+            },
+            3: { 
+                icon: '<i class="fas fa-rocket"></i>', 
+                title: 'Consultoría e Implementación', 
+                desc: `<strong>🔹 PROBLEMA:</strong> Sabes que la IA puede mejorar tu negocio, pero no tienes claro qué herramienta comprar ni cómo medirla. El riesgo de invertir en la solución equivocada es alto.<br><br><strong>✅ SOLUCIÓN:</strong> Realizamos un diagnóstico digital, identificamos oportunidades de mayor impacto y ejecutamos la implementación end-to-end con acompañamiento continuo.`, 
+                benefits: ['Diagnóstico estratégico personalizado', 'Implementación sin interrupciones', 'Métricas de ROI claras y trazables', 'Soporte post-lanzamiento incluido'], 
+                phrase: '"No solo te damos un mapa, te acompañamos en el viaje."' 
+            },
+            4: { 
+                icon: '<i class="fas fa-microphone-alt"></i>', 
+                title: 'Charlas Ejecutivas', 
+                desc: `<strong>🔹 PROBLEMA:</strong> Los directivos escuchan buzzwords como "IA generativa", pero no tienen claridad estratégica sobre cómo impactará su industria ni qué roadmap seguir.<br><br><strong>✅ SOLUCIÓN:</strong> Ofrecemos sesiones de alto nivel, sin tecnicismos innecesarios. Entregamos tendencias, casos de éxito en tu sector y un roadmap práctico de adopción.`, 
+                benefits: ['Visión estratégica 12-24 meses', 'Roadmap de implementación claro', 'Decisiones directivas aceleradas', 'Liderazgo tecnológico informado'], 
+                phrase: '"El futuro pertenece a quienes se preparan para él hoy."' 
+            }
         };
 
-        // ✅ Event Delegation Universal
         document.addEventListener('click', function(e) {
             const card = e.target.closest('[data-id]');
             if (!card) return;
-            
             const id = card.getAttribute('data-id');
             const data = servicesData[id];
             if (!data) return;
 
             modalIcon.innerHTML = data.icon;
             modalTitle.textContent = data.title;
-            modalDesc.textContent = data.desc;
+            modalDesc.innerHTML = data.desc;
             modalBenefits.innerHTML = data.benefits.map(b => `<li><i class="fas fa-check-circle"></i> ${b}</li>`).join('');
             modalPhrase.innerHTML = `<i class="fas fa-quote-left"></i> ${data.phrase}`;
 
